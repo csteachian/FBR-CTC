@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+
+{% block content %}
+{% for user in users %}
+      <div class="userblock">
+      <div class="statheading">
+      <h1><a href="https://fortnitetracker.com/profile/all/{{user.handle}}?season=27" target="_blank">{{user.handle}}</a> <span>[L{{user.level}}] </span></h1>
+      </div>
+      <div class="stats">
+          {% if (user.wins>=0) %}
+        <div class="matches {% if sortType == 'matches' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=matches','_self');">Matches:</b>
+          <span>{{user.matches}}</span>
+        </div>
+        <div class="wins {% if sortType == 'wins' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=wins','_self');">Wins:</b>
+          <span>{{user.wins}}</span>
+        </div>
+        <div class="score {% if sortType == 'score' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=score','_self');">Score:</b>
+          <span>{{user.score}}</span>
+        </div>
+        <div class="kills {% if sortType == 'kills' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=kills','_self');">Kills:</b>
+          <span>{{user.kills}}</span>
+        </div>
+        <div class="kpg {% if sortType == 'kpg' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=kpg','_self');">KPG:</b>
+          <span>{{user.kpg}}</span>
+        </div>
+        <div class="win-rate {% if sortType == 'winrate' %}this{% endif %}">
+          <b onclick="javascript:window.open('?s=winrate','_self');">Win Rate:</b>
+          <span>{{user.winrate}}%</span>
+        </div>
+          {% else %}
+        <div>
+            User stats are {% if (user.wins==-403) %}private{% elif (user.wins==-404) %}unknown{% endif %}.
+        </div>
+          {% endif %}
+      </div>
+      </div>
+{% endfor %}
+{% endblock content %}
+
